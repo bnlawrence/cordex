@@ -9,19 +9,23 @@ def build_cf_axes(region):
     """
     assert set(region.keys()) == {'RotPole','TLC','Nx','Ny'}
 
+    nplon, nplat = region['RotPole']
     domain = cf.Domain()
     
     x1 = region['TLC'][0]
     x2 = x1 + rotated_delta*(region['Nx']-1)
     xdata = np.arange(x1,x2,step=0.44)
+
+    y1 = region['TLC'][1]
+    y2 = y1 - rotated_delta*(region['Ny']-1)
+    ydata = np.arange(y2,y1,step=0.44)
+
     cfx = cf.DimensionCoordinate(data=xdata)
     cfx.set_properties({'axis': 'X', 'standard_name': 'grid_longitude', 'units': 'degrees'})
     xaxis = domain.set_construct(cf.DomainAxis(len(xdata)))
     xcoord = domain.set_construct(cfx, axes=xaxis)
 
-    y1 = region['TLC'][1]
-    y2 = y1 - rotated_delta*(region['Ny']-1)
-    ydata = np.arange(y2,y1,step=0.44)
+   
     cfy = cf.DimensionCoordinate(data=ydata)
     cfy.set_properties({'axis': 'Y', 'standard_name': 'grid_latitude', 'units': 'degrees'})
     yaxis = domain.set_construct(cf.DomainAxis(len(ydata)))
@@ -30,11 +34,11 @@ def build_cf_axes(region):
     c = cf.CoordinateReference()
     c.set_coordinates([xcoord,ycoord])
     c.coordinate_conversion.set_parameter('grid_mapping_name', 'rotated_latitude_longitude')
-    c.coordinate_conversion.set_parameter('grid_north_pole_latitude', region['RotPole'][1])
+    c.coordinate_conversion.set_parameter('grid_north_pole_latitude', nplat )
     c.coordinate_conversion.set_parameter('grid_north_pole_longitude', region['RotPole'][0])
     domain.set_construct(c)
 
-    domain.dump()
+    #domain.dump()
     return domain
 
     
