@@ -75,5 +75,5 @@ if __name__=="__main__":
         cfr = build_cf_axes(region)
         plot_region(cfr,key,base+i+1)
     plt.suptitle('Selected CORDEX Domains')
+    plt.savefig("selected.png")
     plt.show()
-    plt.savefig("selected.pdf")
