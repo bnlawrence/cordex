@@ -25,7 +25,6 @@ def build_cf_axes(region):
     xaxis = domain.set_construct(cf.DomainAxis(len(xdata)))
     xcoord = domain.set_construct(cfx, axes=xaxis)
 
-   
     cfy = cf.DimensionCoordinate(data=ydata)
     cfy.set_properties({'axis': 'Y', 'standard_name': 'grid_latitude', 'units': 'degrees'})
     yaxis = domain.set_construct(cf.DomainAxis(len(ydata)))
