@@ -1,5 +1,4 @@
-from decimal import DecimalException
-from locale import DAY_3
+
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 from tools import build_cf_axes
