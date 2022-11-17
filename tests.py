@@ -1,5 +1,5 @@
 import unittest
-from domains import regions
+from domains import regions, global_south
 from tools import build_cf_axes
 
 class TestCordex(unittest.TestCase):
@@ -8,6 +8,8 @@ class TestCordex(unittest.TestCase):
     """
     def setUp(self):
         self.domains = {k[1]:v[0] for k,v in regions.items()}
+        for k,v in global_south.items():
+            self.domains[k]=v[0]
 
     def test_domains(self):
         """ Test each domain"""
