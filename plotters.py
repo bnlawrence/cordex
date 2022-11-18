@@ -29,7 +29,7 @@ def plot_region(cfr, title, plot_window=211):
     nplon = cr['grid_north_pole_longitude']
 
     # cartopy stuff
-    if key  in ['ANZ',]:
+    if title  in ['ANZ','SEA','S-Ame']:
         if nplat < 0:
             nplat = - nplat
             nplon = nplon - 180
